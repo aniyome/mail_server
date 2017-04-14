@@ -1,0 +1,7 @@
+.DS_Store
+.vagrant
+.project
+.settings/
+.buildpath
+.classpath
+.idea/
