@@ -73,14 +73,14 @@ mail_owner = postfix
 # other configuration parameters.
 #
 #myhostname = host.domain.tld
-myhostname = shushu1.shushu.pro
+myhostname = example.com
 
 # The mydomain parameter specifies the local internet domain name.
 # The default is to use $myhostname minus the first component.
 # $mydomain is used as a default value for many other configuration
 # parameters.
 #
-mydomain = shushu.pro
+mydomain = example.com
 
 # SENDING MAIL
 # 
@@ -110,10 +110,10 @@ myorigin = $mydomain
 #
 # Note: you need to stop/start Postfix when this parameter changes.
 #
-#inet_interfaces = all
+inet_interfaces = all
 #inet_interfaces = $myhostname
 #inet_interfaces = $myhostname, localhost
-inet_interfaces = localhost $myhostname
+#inet_interfaces = localhost $myhostname
 
 # Enable IPv4, and IPv6 if supported
 inet_protocols = ipv4
@@ -161,7 +161,7 @@ inet_protocols = ipv4
 #
 # See also below, section "REJECTING MAIL FOR UNKNOWN LOCAL USERS".
 #
-mydestination = localhost
+mydestination = $myhostname, shushu1.shushu.pro
 #mydomain = domain.tld
 #mydestination = $myhostname, localhost.$mydomain, localhost, $mydomain
 #mydestination = $myhostname, localhost.$mydomain, localhost, $mydomain,
@@ -208,7 +208,7 @@ mydestination = localhost
 # 
 #local_recipient_maps = unix:passwd.byname $alias_maps
 #local_recipient_maps = proxy:unix:passwd.byname $alias_maps
-#local_recipient_maps =
+local_recipient_maps =
 
 # The unknown_local_recipient_reject_code specifies the SMTP server
 # response code when a recipient domain matches $mydestination or
@@ -262,7 +262,7 @@ unknown_local_recipient_reject_code = 550
 # of listing the patterns here. Specify type:table for table-based lookups
 # (the value on the table right-hand side is not used).
 #
-mynetworks = 127.0.0.1
+mynetworks = 127.0.0.1, 192.168.33.0/24, 127.0.0.0/8
 #mynetworks = $config_directory/mynetworks
 #mynetworks = hash:/etc/postfix/network_table
 
@@ -417,7 +417,7 @@ alias_database = hash:/etc/aliases
 # "Maildir/" for qmail-style delivery (the / is required).
 #
 #home_mailbox = Mailbox
-#home_mailbox = Maildir/
+home_mailbox = Maildir/
  
 # The mail_spool_directory parameter specifies the directory where
 # UNIX-style mailboxes are kept. The default setting depends on the
@@ -425,6 +425,7 @@ alias_database = hash:/etc/aliases
 #
 #mail_spool_directory = /var/mail
 #mail_spool_directory = /var/spool/mail
+mail_spool_directory = /var/local/mail
 
 # The mailbox_command parameter specifies the optional external
 # command to use instead of mailbox delivery. The command is run as
@@ -529,7 +530,7 @@ alias_database = hash:/etc/aliases
 #
 #luser_relay = $user@other.host
 #luser_relay = $local@other.host
-#luser_relay = admin+$local
+luser_relay = maildev
   
 # JUNK MAIL CONTROLS
 # 
