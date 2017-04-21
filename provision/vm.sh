@@ -54,3 +54,6 @@ updatedb
 ##### postfix
 cp -a /vagrant/provision/postfix/main.cf /etc/postfix/main.cf
 service postfix restart
+
+##### Network restart
+systemctl restart network

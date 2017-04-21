@@ -12,4 +12,5 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.synced_folder ".", "/vagrant"
+  config.vm.provision :shell, :path => "./provision/vm.sh"
 end
