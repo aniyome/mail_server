@@ -30,7 +30,7 @@ isProgressService () {
 
 ##### yum update , install
 yum -y update
-yum install -y vim tree wget git postfix ntp
+yum install -y vim tree wget git postfix ntp nkf
 
 ##### iptables
 if isProgressService 'iptables'; then
