@@ -679,3 +679,11 @@ sample_directory = /usr/share/doc/postfix-2.10.1/samples
 # readme_directory: The location of the Postfix README files.
 #
 readme_directory = /usr/share/doc/postfix-2.10.1/README_FILES
+
+# SMTP_Auth
+smtpd_sasl_auth_enable = yes
+smtp_sasl_security_options = noanonymous
+broken_sasl_auth_clients = yes
+smtpd_recipient_restrictions=
+  permit_mynetworks,
+  permit_sasl_authenticated

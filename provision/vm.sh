@@ -30,7 +30,7 @@ isProgressService () {
 
 ##### yum update , install
 yum -y update
-yum install -y vim tree wget git postfix ntp nkf
+yum install -y vim tree wget git postfix ntp nkf cyrus-sasl cyrus-sasl-plain
 
 ##### iptables
 if isProgressService 'iptables'; then
@@ -52,8 +52,13 @@ yum -y install mlocate
 updatedb
 
 ##### postfix
-cp -a /vagrant/provision/postfix/main.cf /etc/postfix/main.cf
-service postfix restart
+sudo cp -a /vagrant/provision/postfix/main.cf /etc/postfix/main.cf
+sudo cp -a /vagrant/provision/postfix/master.cf /etc/postfix/master.cf
+saslpasswd2 -c -u `/usr/sbin/postconf -h myhostname` vagrant
+sudo service postfix restart
+
+systemctl enable saslauthd.service
+systemctl start saslauthd.service
 
 ##### Network restart
 systemctl restart network
